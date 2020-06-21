@@ -4,7 +4,8 @@ const form=document.querySelector('form');
 const card=document.querySelector('.card');
 const details=document.querySelector('.details');
 const img=card.querySelector('img.time');
-const icon=card.querySelector('.icon img')
+const icon=card.querySelector('.icon img');
+const out=document.querySelector('.out');
 
 
 const upDateUI=data=>{
@@ -48,5 +49,11 @@ form.addEventListener('submit',e=>{
     form.reset();
     upDateCity(cityName)
         .then(data=>upDateUI(data))
-        .catch(err=>console.log(err));
+        .catch(err=>{
+            document.querySelector('.errors ').classList.remove('d-none');
+            document.querySelector('.errors span').textContent=err.message;
+        });
+});
+out.addEventListener('click',()=>{
+    document.querySelector('.errors ').classList.add('d-none');
 });
